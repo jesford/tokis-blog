@@ -1,6 +1,6 @@
 ## Notes
 
-I'm following the django girls [tutorial](https://www.gitbook.com/book/djangogirls/djangogirls-tutorial/details),
+I'm following the Django Girls [tutorial](https://www.gitbook.com/book/djangogirls/djangogirls-tutorial/details),
 and working in this directory: `~/djangogirls/`
 
 They recommend using a virtual environment for every website project. I'll use 
@@ -38,6 +38,20 @@ Create the superuser who can login: `python manage.py createsuperuser`, and
 enter a username, email and password. Now this user can log-in. Log-in and 
 create a few blog posts...
 
+Create a new GitHub repo for this project and push content there (aside from 
+contents of `.gitignore`: listed [here](http://tutorial.djangogirls.org/en/deploy/)).
 
+Log-in to free beginner account at https://www.pythonanywhere.com. On the 
+dashboard (or "Consoles") page, select option to start a bash console. Clone the
+GitHub repository for the blog.
+
+The PythonAnywhere bash console won't let me install MiniConda, so I'll use
+virtual environments here, mimicking what I did with conda environments locally.
+In the PythonAnywhere console:
+```
+virtualenv --python=python3.5 djangotutorial
+source djangotutorial/bin/activate
+pip install django~=1.9.5
+```
 
 Left off tutorial at top of [this page]().
