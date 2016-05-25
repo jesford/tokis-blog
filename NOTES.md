@@ -29,4 +29,15 @@ python manage.py makemigrations blog
 python manage.py migrate blog
 ```
 
-Left off tutorial at top of [this page](http://tutorial.djangogirls.org/en/django_admin/).
+Register this new model by adding code to `blog/admin.py`, as given in 
+[this page](http://tutorial.djangogirls.org/en/django_admin/). Now typing 
+`python manage.py runserver` will give a log-in page here: 
+http://127.0.0.1:8000/admin/
+
+Create the superuser who can login: `python manage.py createsuperuser`, and 
+enter a username, email and password. Now this user can log-in. Log-in and 
+create a few blog posts...
+
+
+
+Left off tutorial at top of [this page]().
