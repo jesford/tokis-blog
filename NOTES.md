@@ -42,16 +42,40 @@ Create a new GitHub repo for this project and push content there (aside from
 contents of `.gitignore`: listed [here](http://tutorial.djangogirls.org/en/deploy/)).
 
 Log-in to free beginner account at https://www.pythonanywhere.com. On the 
-dashboard (or "Consoles") page, select option to start a bash console. Clone the
-GitHub repository for the blog.
+"Consoles" page, select option to start a bash console. Clone the GitHub
+repository for the blog.
 
 The PythonAnywhere bash console won't let me install MiniConda, so I'll use
 virtual environments here, mimicking what I did with conda environments locally.
-In the PythonAnywhere console:
+In the `~tokis-blog/` directory in the PythonAnywhere console:
 ```
 virtualenv --python=python3.5 djangotutorial
 source djangotutorial/bin/activate
 pip install django~=1.9.5
 ```
 
-Left off tutorial at top of [this page]().
+The PythonAnywhere server will use a different database than I did locally. So
+have to initialize it and create the log-ins there as well:
+```
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+Go to PythonAnywhere Console -> Web tab -> Add a new web app. Confirm domain
+name, choose manual configuration, Python 3.5, and click Next. On the 
+Configuration page, enter path to virtual environment (in this case `/home/tokiwartooth/tokis-blog/djangotutorial`). Click on the link for
+`WSGI configuration file`, and replace all contents of this file with the code 
+given [here](http://tutorial.djangogirls.org/en/deploy/). Save and go back to 
+the Web tab. 
+
+Click green Reload button, and a link is generated to the live
+website!... which doesn't contain the blog posts created locally even though I
+created an identical superuser on PythonAnwhere. I *think* this is the expected 
+behavior, because my local database containing the posts was not pushed to 
+GitHub. Hopefully there will be a way to connect my local database with the one
+on PythonAnywhere, or what was the point of making posts locally??
+
+
+
+
+Left off tutorial at top of [this page](http://tutorial.djangogirls.org/en/django_urls/).
