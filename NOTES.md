@@ -5,28 +5,28 @@ and working in this directory: `~/djangogirls/`
 
 They recommend using a virtual environment for every website project. I'll use 
 conda environments instead; I created one called djangotutorial: 
-`source activate djangotutorial`
+`$ source activate djangotutorial`
 
 Create the directories and files for a new django site:
-`django-admin startproject mysite .`
+`$ django-admin startproject mysite .`
 
 A few edits to `settings.py` following the [instructions](http://tutorial.djangogirls.org/en/django_start_project/), 
 and then:
 ```
-python manage.py migrate
-python manage.py runserver
+$ python manage.py migrate
+$ python manage.py runserver
 ```
 The website is now running locally here: http://127.0.0.1:8000/
 
 Create an application (and a new blog subdirectory):
-`python manage.py startapp blog`
+`$ python manage.py startapp blog`
 
 Tell Django to use the `blog` app, by adding it to `settings.py`, and add a 
 bunch of actual content to `blog/models.py` as outlined [here](http://tutorial.djangogirls.org/en/django_models/). Then tell Django 
 that a new/updated model exists, and apply it to the database:
 ```
-python manage.py makemigrations blog
-python manage.py migrate blog
+$ python manage.py makemigrations blog
+$ python manage.py migrate blog
 ```
 
 Register this new model by adding code to `blog/admin.py`, as given in 
@@ -49,16 +49,16 @@ The PythonAnywhere bash console won't let me install MiniConda, so I'll use
 virtual environments here, mimicking what I did with conda environments locally.
 In the `~tokis-blog/` directory in the PythonAnywhere console:
 ```
-virtualenv --python=python3.5 djangotutorial
-source djangotutorial/bin/activate
-pip install django~=1.9.5
+$ virtualenv --python=python3.5 djangotutorial
+$ source djangotutorial/bin/activate
+$ pip install django~=1.9.5
 ```
 
 The PythonAnywhere server will use a different database than I did locally. So
 have to initialize it and create the log-ins there as well:
 ```
-python manage.py migrate
-python manage.py createsuperuser
+$ python manage.py migrate
+$ python manage.py createsuperuser
 ```
 
 Go to PythonAnywhere Console -> Web tab -> Add a new web app. Confirm domain
@@ -85,11 +85,38 @@ called `post_list` to the homepage.
 Now we need to create that view. In `mysite/views.py`, define a function called 
 `post_list`, which returns a rendering of the template `post_list.html`. Create 
 this file in the new project subdirectory: `blog/templates/blog/`. Add some
-basic html to `blog/templates/blog/post_list.html`. Commit and push to GitHub,
-and pull changes down to PythonAnywhere.
+basic html to `blog/templates/blog/post_list.html`. Commit and push to GitHub, 
+pull changes down to PythonAnywhere, and hit reload on their Web tab.
 
+Locally, in `~/djangogirls/` type `python manage.py shell` to get an interactive
+Python + Django prompt. Then enter:
+```
+>>> from blog.models import Post
+>>> Post.objects.all()
+```
+The posts we created via the admin interface are listed. We can also create
+posts here on the command line.
+```
+>>> from django.contrib.auth.models import User
+>>> User.objects.all()
+>>> pup = User.objects.get(username='toki')  # create an instance of user Toki
+>>> Post.objects.create(author=pup, title="Pet me", text="Or I'll bite you.")
+>>> Post.objects.all()  # now shows a longer list of posts
+>>> post = Post.objects.get(title="What is egg?")
+>>> post.publish()  # publish a previously unpublished post
+```
+As outlined on [this page](http://tutorial.djangogirls.org/en/django_orm/) you 
+can query, filter, and publish posts from this command line. Use `exit()` when
+finished.
 
-
-
+To actually connect the database of models to the template, we edit 
+`blog/views.py`, to render the imported posts, ordered by published date. In 
+`post_list.html` we include Django code, as given [here](http://tutorial.djangogirls.org/en/django_templates/). A for loop in 
+Django looks something like 
+```
+{% for post in posts %}
+    {{ post }}
+{% endfor %}
+```
 
 Left off tutorial at top of [this page](http://tutorial.djangogirls.org/en/django_urls/).
