@@ -122,4 +122,14 @@ Finish copying the Django html linked above. Push to GitHub (including the
 database, which I removed from `.gitignore`), pull down to PythonAnywhere, and
 reload.
 
-Left off tutorial at top of [this page](http://tutorial.djangogirls.org/en/css/).
+For CSS styling, we'll use [Bootstrap](http://getbootstrap.com/), by adding 
+these lines to the `<head>` of `post_list.html`:
+```
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+```
+Create a CSS file in a new directory, `blog/static/css/blog.css`, and add some
+basic CSS. Include this by putting adding lines to the html file, given [here](http://tutorial.djangogirls.org/en/css/). Copy-paste and play with lots
+of CSS (and modification to the html file) as given on that page.
+
+Left off tutorial at top of [this page](http://tutorial.djangogirls.org/en/template_extending/).
