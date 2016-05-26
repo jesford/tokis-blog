@@ -118,5 +118,8 @@ Django looks something like
     {{ post }}
 {% endfor %}
 ```
+Finish copying the Django html linked above. Push to GitHub (including the 
+database, which I removed from `.gitignore`), pull down to PythonAnywhere, and
+reload.
 
-Left off tutorial at top of [this page](http://tutorial.djangogirls.org/en/django_urls/).
+Left off tutorial at top of [this page](http://tutorial.djangogirls.org/en/css/).
