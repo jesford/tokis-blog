@@ -70,10 +70,24 @@ the Web tab.
 
 Click green Reload button, and a link is generated to the live
 website!... which doesn't contain the blog posts created locally even though I
-created an identical superuser on PythonAnwhere. I *think* this is the expected 
+created an identical superuser on PythonAnwhere. (I *think* this is the expected 
 behavior, because my local database containing the posts was not pushed to 
 GitHub. Hopefully there will be a way to connect my local database with the one
-on PythonAnywhere, or what was the point of making posts locally??
+on PythonAnywhere, or what was the point of making posts locally??)
+
+Working locally now, edit `mysite/urls.py`, so that a new regex expression in 
+`urlpatterns`, `url(r'', include('blog.urls'))`, will make the blog homepage 
+(http://127.0.0.1:8000/) correspond to the list of blog entries (the page for 
+which has yet to be created). Create the `blogs/urls.py` file (which the 
+previous file is trying to import), and add the code given [here](http://tutorial.djangogirls.org/en/django_urls/), which assigns a view 
+called `post_list` to the homepage. 
+
+Now we need to create that view. In `mysite/views.py`, define a function called 
+`post_list`, which returns a rendering of the template `post_list.html`. Create 
+this file in the new project subdirectory: `blog/templates/blog/`. Add some
+basic html to `blog/templates/blog/post_list.html`. Commit and push to GitHub,
+and pull changes down to PythonAnywhere.
+
 
 
 
